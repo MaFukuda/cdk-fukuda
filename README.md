@@ -22,4 +22,8 @@ https://docs.google.com/presentation/d/1K5KYcDq8VLgJPJoIzW72nByZUXcmCjLdLT5ZpDa4
 * `nvm use node`    make node.js latest version.
 * `npm install`  
 * `aws configure`   ~/.aws/config,credentials
+* `npx cdk bootstrap`   
+* `npx cdk list`    
+* `npx cdk deploy CdkFukudaStack`
+* 
 
