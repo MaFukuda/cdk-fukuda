@@ -6,12 +6,12 @@ import { CdkFukudaEc2Stack } from '../lib/cdk-fukuda-ec2-stack';
 
 const app = new cdk.App();
 
-
+//const myEnv = { account: "910003668865", region: "ap-northeast-1" }, // dev-wao-aedyn
+const myEnv = { account: "964922594927", region: "ap-northeast-1" }; // awshandson1841
 
 
 new CdkFukudaVpcStack(app, 'CdkFukudaVpcStack', {
-//env: { account: "910003668865", region: "ap-northeast-1" }, // dev-wao-aedyn
-env: { account: "964922594927", region: "ap-northeast-1" }, // awshandson1841
+  env: myEnv,
 
   /* If you don't specify 'env', this stack will be environment-agnostic.
    * Account/Region-dependent features and context lookups will not work,
@@ -30,7 +30,6 @@ env: { account: "964922594927", region: "ap-northeast-1" }, // awshandson1841
 
 
 new CdkFukudaEc2Stack(app, 'CdkFukudaEc2Stack', {
-  //env: { account: "910003668865", region: "ap-northeast-1" }, // dev-wao-aedyn
-  env: { account: "964922594927", region: "ap-northeast-1" }, // awshandson1841
+  env: myEnv,
 
   });
