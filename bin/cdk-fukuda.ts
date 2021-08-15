@@ -1,10 +1,15 @@
 #!/usr/bin/env node
 import 'source-map-support/register';
 import * as cdk from '@aws-cdk/core';
-import { CdkFukudaStack } from '../lib/cdk-fukuda-stack';
+import { CdkFukudaVpcStack } from '../lib/cdk-fukuda-vpc-stack';
+import { CdkFukudaEc2Stack } from '../lib/cdk-fukuda-ec2-stack';
 
 const app = new cdk.App();
-new CdkFukudaStack(app, 'CdkFukudaStack', {
+
+
+
+
+new CdkFukudaVpcStack(app, 'CdkFukudaVpcStack', {
 //env: { account: "910003668865", region: "ap-northeast-1" }, // dev-wao-aedyn
 env: { account: "964922594927", region: "ap-northeast-1" }, // awshandson1841
 
@@ -22,3 +27,10 @@ env: { account: "964922594927", region: "ap-northeast-1" }, // awshandson1841
 
   /* For more information, see https://docs.aws.amazon.com/cdk/latest/guide/environments.html */
 });
+
+
+new CdkFukudaEc2Stack(app, 'CdkFukudaEc2Stack', {
+  //env: { account: "910003668865", region: "ap-northeast-1" }, // dev-wao-aedyn
+  env: { account: "964922594927", region: "ap-northeast-1" }, // awshandson1841
+
+  });

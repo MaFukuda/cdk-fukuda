@@ -2,17 +2,12 @@ import * as cdk from '@aws-cdk/core';
 import ec2 = require('@aws-cdk/aws-ec2');
 import { CfnSubnet, Peer, Port, SecurityGroup } from "@aws-cdk/aws-ec2";
 
-export class CdkFukudaStack extends cdk.Stack {
+export class CdkFukudaVpcStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-/*
-    const vpc = ec2.Vpc.fromLookup(this, 'Vpc', {
-      vpcName: "vpc-system-ap-northeast-1"
-    });
-    */
 
-    const vpc = new ec2.Vpc(this, "VPC-Fukuda", {
+    const vpc = new ec2.Vpc(this, "VPC", {
       cidr: "192.168.0.0/16",
       subnetConfiguration: [
         {
