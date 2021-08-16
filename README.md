@@ -24,6 +24,11 @@ https://docs.google.com/presentation/d/1K5KYcDq8VLgJPJoIzW72nByZUXcmCjLdLT5ZpDa4
 * `aws configure`   ~/.aws/config,credentials
 * `npx cdk bootstrap`   
 * `npx cdk list`    
-* `npx cdk deploy CdkFukudaStack`
+* `npx cdk deploy CdkFukudaVpcStack`
+* `npx cdk deploy CdkFukudaEc2Stack`
 * 
 
+## 参考文献
+
+* https://github.com/aws/aws-cdk
+* https://github.com/aws-samples/aws-cdk-examples

@@ -4,6 +4,8 @@ import * as cdk from '@aws-cdk/core';
 import { CdkFukudaVpcStack } from '../lib/cdk-fukuda-vpc-stack';
 import { CdkFukudaEc2Stack } from '../lib/cdk-fukuda-ec2-stack';
 
+import { CdkFukudaSnsStack } from '../lib/cdk-fukuda-sns-stack';
+
 const app = new cdk.App();
 
 //const myEnv = { account: "910003668865", region: "ap-northeast-1" }, // dev-wao-aedyn
@@ -31,5 +33,8 @@ new CdkFukudaVpcStack(app, 'CdkFukudaVpcStack', {
 
 new CdkFukudaEc2Stack(app, 'CdkFukudaEc2Stack', {
   env: myEnv,
+});
 
-  });
+new CdkFukudaSnsStack(app, 'CdkFukudaSnsStack', {
+  env: myEnv,
+});

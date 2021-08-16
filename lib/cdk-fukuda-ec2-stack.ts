@@ -1,6 +1,5 @@
 import * as cdk from '@aws-cdk/core';
 import ec2 = require('@aws-cdk/aws-ec2');
-import { CfnSubnet, Peer, Port, SecurityGroup } from "@aws-cdk/aws-ec2";
 
 export class CdkFukudaEc2Stack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
