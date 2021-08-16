@@ -32,3 +32,10 @@ https://docs.google.com/presentation/d/1K5KYcDq8VLgJPJoIzW72nByZUXcmCjLdLT5ZpDa4
 
 * https://github.com/aws/aws-cdk
 * https://github.com/aws-samples/aws-cdk-examples
+
+
+
+##
+* `ssh -T git@github.com` check ssh connection.
+* `git remote add origin git@github.com:MaFukuda/cdk-fukuda.git`
+* `git push -u origin main`
