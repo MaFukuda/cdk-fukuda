@@ -19,5 +19,7 @@ export class CdkFukudaSnsStack extends cdk.Stack {
     
     topic.addSubscription(new subs.SqsSubscription(queue));
 
+    const topic2 = new sns.Topic(this, 'EmailCdkTopic');
+    topic2.addSubscription(new subs.EmailSubscription('fukuda@wni.com'));
   }
 }
