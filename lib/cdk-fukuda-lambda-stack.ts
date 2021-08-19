@@ -3,6 +3,7 @@ import * as dynamodb from '@aws-cdk/aws-dynamodb';
 import * as lambda from '@aws-cdk/aws-lambda';
 import { App,  Duration, Stack, StackProps } from '@aws-cdk/core';
 import * as iam from '@aws-cdk/aws-iam';
+import * as logs from '@aws-cdk/aws-logs';
 
 export class CdkFukudaLambdaStack extends Stack {
     constructor(scope: App, id: string, props: StackProps) {
@@ -17,21 +18,6 @@ export class CdkFukudaLambdaStack extends Stack {
 
         const environment = { SAMPLE_TABLE: table.tableName };
 
-//     assumedBy: new iam.ServicePrincipal('translate.amazonaws.com'),
-
-        const state = new iam.PolicyStatement({
-            effect: iam.Effect.ALLOW,
-            resources: ['*'],
-            actions: [            
-                'ecr:GetAuthorizationToken',
-                'ecr:BatchCheckLayerAvailability',
-                'ecr:GetDownloadUrlForLayer',
-                'ecr:BatchGetImage',
-                'logs:CreateLogStream',
-                'logs:PutLogEvents'
-            ]
-         });
-       
 
         const translate_function = new lambda.Function(this, 'translate_function', {
             description: 'Translate module from Japanese to English.',
@@ -48,17 +34,30 @@ export class CdkFukudaLambdaStack extends Stack {
         if (myRole) {
             myRole.addManagedPolicy(iam.ManagedPolicy.fromAwsManagedPolicyName('TranslateFullAccess'));
         }
-        
-        //  assumedBy: new iam.ServicePrincipal('sns.amazonaws.com'),
-    
-     
 
-       // translate_function.addToRolePolicy(state);
+        const restApiLogAccessLogGroup = new logs.LogGroup(
+            this,
+            'translate-api-access-log-group',
+            {
+              logGroupName: `/aws/apigateway/translate-api-access-log`,
+              retention: 365,
+            },
+        );
+
+        const api = new apigateway.RestApi(this, 'translate-api', { 
+            cloudWatchRole: false,
+            deployOptions: {
+                dataTraceEnabled: true,
+                loggingLevel: apigateway.MethodLoggingLevel.INFO,
+
+                accessLogDestination: new apigateway.LogGroupLogDestination(
+                  restApiLogAccessLogGroup,
+                ),
+                accessLogFormat: apigateway.AccessLogFormat.clf(),
+            },
+        });
 
 
-        //table.grantReadWriteData(putItemFunction);
-
-        const api = new apigateway.RestApi(this, 'ServerlessRestApi', { cloudWatchRole: false });
         api.root.addMethod('GET', new apigateway.LambdaIntegration(translate_function));
 
     }
