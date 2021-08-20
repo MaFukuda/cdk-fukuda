@@ -1,17 +1,20 @@
 
-
+import os
 import json
 import boto3
 import datetime
 
 translate = boto3.client(service_name='translate')
 dynamodb = boto3.resource('dynamodb')
-table = dynamodb.Table('CdkFukudaLambdaStack-translatehistoryB9DAA035-1TOTCJ3IXGAVW')
-   # Table名は毎回変わる？ どうやって取得する？
+
+table_name = os.environ['HISTORY_TABLE']
+print('table: '+table_name )
+table = dynamodb.Table(table_name)
 
 def handler(event, context):
     print('request: {}'.format(json.dumps(event)))
-    
+
+
     query_parameters=event.get('queryStringParameters')
     print('query_parameters: {}'.format(json.dumps(query_parameters)))
 
@@ -40,4 +43,5 @@ def handler(event, context):
         },
         'body': 'translated: ' + output_text
     }
+
 
