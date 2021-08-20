@@ -10,8 +10,8 @@ export class CdkFukudaLambdaStack extends Stack {
         super(scope, id, props);
 
         // DynamoDB table to store item: {id: <ID>, name: <NAME>}
-        const table = new dynamodb.Table(this, 'SampleTable', {
-            partitionKey: { name: 'id', type: dynamodb.AttributeType.STRING },
+        const table = new dynamodb.Table(this, 'translate-history', {
+            partitionKey: { name: 'timestamp', type: dynamodb.AttributeType.STRING },
             readCapacity: 2,
             writeCapacity: 2
         });
@@ -33,6 +33,7 @@ export class CdkFukudaLambdaStack extends Stack {
         const myRole = translate_function.role;
         if (myRole) {
             myRole.addManagedPolicy(iam.ManagedPolicy.fromAwsManagedPolicyName('TranslateFullAccess'));
+            myRole.addManagedPolicy(iam.ManagedPolicy.fromAwsManagedPolicyName('AmazonDynamoDBFullAccess'));
         }
 
         const restApiLogAccessLogGroup = new logs.LogGroup(
