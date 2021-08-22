@@ -39,6 +39,7 @@ export class CdkFukudaLambdaStack extends Stack {
         // ToDO: 
         // 既にLog Groupが存在する時はエラーになるので、既存で存在する時はGetしてくるといった
         // 処理を盛り込んだ方が良い。
+        // Delete policyで自動的に消えるかも。
         const log_group_id = 'translate api access log';
         const log_group_name = `/aws/apigateway/translate-api-access-log`;
         let restApiLogAccessLogGroup = logs.LogGroup.fromLogGroupName(this, 
